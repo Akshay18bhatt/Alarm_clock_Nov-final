@@ -67,6 +67,7 @@ function start_timer(list_item_div,total_time_till_zero){
     let sec_div=list_item_div.querySelector("#sec_div");
 
     const timeOver= setInterval(()=>{
+        list_item_div.setAttribute("data-clear",`${timeOver}`);
         if(total_time_till_zero==0){
             
             myaudio.src="./assets/Bas Tu Bhag Milkha - Bhaag Milkha Bhaag ! Hindi.mp3"
@@ -109,7 +110,11 @@ function delete_time(){
         let timer_list_P= document.querySelector("#timers_list>p");
         timer_list_P.classList.remove("hide");
     }
-    let parent=event.target.parentNode.remove();
+    let parent=event.target.parentNode;
+    let clear_id= parent.getAttribute("data-clear");
+    console.log(clear_id);
+    clearInterval(clear_id);
+    parent.remove();
 
     // console.log(parent);
 }
